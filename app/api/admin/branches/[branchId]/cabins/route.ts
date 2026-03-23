@@ -65,6 +65,15 @@ export async function GET(
 
     await connectDB();
 
+    // Validate branch
+    const branchExists = await Branch.findById(branchId);
+    if (!branchExists) {
+      return NextResponse.json(
+        { message: "Branch not found" },
+        { status: 404 }
+      );
+    }
+
     const cabins = await Cabin.find({
       branch: branchId,
       isActive: true,
