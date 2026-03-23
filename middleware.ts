@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const token = req.cookies.get("admin_token")?.value;
 
   // If no token → block
@@ -10,7 +10,9 @@ export function middleware(req: NextRequest) {
   }
 
   try {
-    jwt.verify(token, process.env.JWT_SECRET as string);
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET as string);
+
+    await jwtVerify(token, secret);
     return NextResponse.next(); // allow request
   } catch (error) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
