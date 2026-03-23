@@ -27,7 +27,6 @@ export async function POST(req: Request) {
     }
 
     const isPasswordValid = await bcrypt.compare(password, admin.password);
-
     if (!isPasswordValid) {
       return NextResponse.json(
         { message: "Invalid credentials" },
@@ -35,23 +34,23 @@ export async function POST(req: Request) {
       );
     }
 
-    const token = await jwt.sign(
-      { adminId: admin._id, email: admin.email },
-      process.env.JWT_SECRET,
-      { expiresId: "1d" }
+    const token = jwt.sign(
+      { adminId: admin._id.toString(), email: admin.email },
+      process.env.JWT_SECRET as string,
+      { expiresIn: "1d" }
     );
 
-    (await cookies()).set("admin_token", token, {
+    const cookieStore = await cookies();
+    cookieStore.set("admin_token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
     });
 
-    return NextResponse.json({
-      message: "Login successful",
-    });
+    return NextResponse.json({ message: "Login successful" });
   } catch (error) {
+    console.error("LOGIN ERROR:", error);
     return NextResponse.json(
       { message: "Something went wrong" },
       { status: 500 }
