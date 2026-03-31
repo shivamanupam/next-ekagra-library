@@ -12,6 +12,7 @@ const BookingSchema = new Schema(
       ref: "Cabin",
       required: true,
     },
+
     studentName: {
       type: String,
       required: true,
@@ -21,29 +22,13 @@ const BookingSchema = new Schema(
       type: String,
       required: true,
     },
-    bookingType: {
-      type: String,
-      enum: ["TIME_SLOT", "SUBSCRIPTION"],
-      required: true,
-    },
+
     plan: {
       type: String,
-      enum: [
-        // time-slot
-        "6H",
-        "9H",
-        "12H",
-        "FULL_DAY",
-        // subscription
-        "WEEKLY",
-        "MONTHLY",
-        "QUARTERLY",
-        "HALF_YEARLY",
-        "YEARLY",
-      ],
+      enum: ["WEEKLY", "MONTHLY", "QUARTERLY", "HALF_YEARLY", "YEARLY"],
       required: true,
     },
-    // Always present
+
     startDate: {
       type: Date,
       required: true,
@@ -52,9 +37,50 @@ const BookingSchema = new Schema(
       type: Date,
       required: true,
     },
-    // Only for TIME_SLOT
-    startTime: Date,
-    endTime: Date,
+
+    // normalized time slot
+    startTimeInMinutes: {
+      type: Number,
+      required: true,
+    },
+    endTimeInMinutes: {
+      type: Number,
+      required: true,
+    },
+    expiresAt: {
+      type: Date,
+      required: true,
+      index: true,
+    },
+
+    // 🔹 NEW: booking lifecycle
+    status: {
+      type: String,
+      enum: ["HOLD", "ACTIVE", "CANCELLED"],
+      default: "HOLD",
+    },
+
+    // 🔹 NEW: payment lifecycle
+    paymentStatus: {
+      type: String,
+      enum: ["PENDING", "PAID", "FAILED"],
+      default: "PENDING",
+    },
+
+    // 🔹 NEW: pricing & payment trace
+    amount: {
+      type: Number,
+      required: true,
+    },
+
+    paymentProvider: {
+      type: String,
+      default: "MOCK", // later: RAZORPAY
+    },
+
+    transactionId: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
