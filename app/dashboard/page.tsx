@@ -1,7 +1,14 @@
-import React from "react";
+import LogoutBtn from "@/components/LogoutBtn";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <div className="flex justify-between p-4">
+        <h2>Dashboard</h2>
+        <LogoutBtn />
+      </div>
+    </>
+  );
 };
 
 export default Dashboard;
