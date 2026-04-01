@@ -1,5 +1,8 @@
 "use client";
 
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Tooltip } from "@mui/material";
+
 const LogoutBtn = () => {
   const handleLogout = async () => {
     try {
@@ -14,12 +17,13 @@ const LogoutBtn = () => {
   };
   return (
     <>
-      <button
-        onClick={handleLogout}
-        className="border rounded-sm px-2 py-1 cursor-pointer"
-      >
-        Logout
-      </button>
+      <Tooltip title="Logout">
+        <LogoutIcon
+          fontSize="medium"
+          onClick={handleLogout}
+          className="cursor-pointer"
+        />
+      </Tooltip>
     </>
   );
 };

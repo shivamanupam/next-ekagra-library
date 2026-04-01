@@ -48,33 +48,35 @@ export default function LoginPage() {
 
         <form
           onSubmit={handleSubmit}
-          className="border rounded-sm px-4 py-8 flex flex-col gap-8"
+          className="border rounded-sm px-8 py-8 flex flex-col gap-8"
         >
-          <div className="flex gap-4">
-            <label htmlFor="email">Email</label>
-            <input
-              placeholder="Enter admin email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              className="border rounded-sm px-2 py-1 w-fit min-w-[28ch]"
-            />
-          </div>
+          <div className="flex flex-row">
+            <div className="flex flex-col items-center min-w-fit gap-4 p-4 text-md">
+              <label htmlFor="email">Email</label>
+              <label htmlFor="password">Password</label>
+            </div>
 
-          <div className="flex gap-4">
-            <label htmlFor="password">Password</label>
-            <input
-              placeholder="Please enter admin password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              className="border rounded-sm px-2 py-1 w-fit min-w-[28ch]"
-            />
+            <div className="flex flex-col gap-4">
+              <input
+                placeholder="Enter admin email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                className="border rounded-sm px-2 py-1 w-fit min-w-[28ch]"
+              />
+              <input
+                placeholder="Please enter admin password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                className="border rounded-sm px-2 py-1 w-fit min-w-[28ch]"
+              />
+            </div>
           </div>
 
           <button
             disabled={loading}
-            className="border rounded-sm px-4 py-2 max-w-fit cursor-pointer"
+            className="border rounded-sm px-4 py-2 max-w-fit cursor-pointer self-center"
           >
             {loading ? "Loging In..." : "Login"}
           </button>

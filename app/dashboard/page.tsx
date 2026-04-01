@@ -1,11 +1,10 @@
-import LogoutBtn from "@/components/LogoutBtn";
+import Header from "@/components/Header";
 
 const Dashboard = () => {
   return (
     <>
-      <div className="flex justify-between p-4">
-        <h2>Dashboard</h2>
-        <LogoutBtn />
+      <div className="flex p-4">
+        <h2>Dashboard Main Component Displaying</h2>
       </div>
     </>
   );
