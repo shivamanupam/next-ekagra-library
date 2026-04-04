@@ -31,7 +31,7 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/dashboard");
+      router.push("/admin");
     } catch (err) {
       console.log("Login Error: ", err);
       setLoading(false);
