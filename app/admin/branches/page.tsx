@@ -24,12 +24,13 @@ const style = {
   transform: "translate(-50%, -50%)",
   minWidth: 400,
   border: "1px solid white",
-  borderRadius: "5px",
+  backgroundColor: "black",
+  borderRadius: "12px",
   boxShadow: 24,
   p: 4,
   display: "flex",
   flexDirection: "column",
-  gap: "24px",
+  gap: "36px",
 };
 
 const BranchPage = () => {
