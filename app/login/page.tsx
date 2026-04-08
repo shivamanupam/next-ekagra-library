@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import { IconButton } from "@mui/material";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -41,6 +44,14 @@ export default function LoginPage() {
 
   return (
     <>
+      <IconButton sx={{ color: "white", cursor: "pointer" }}>
+        <KeyboardBackspaceIcon
+          className="absolute top-16 left-10"
+          onClick={() => router.push("/")}
+        >
+          Back
+        </KeyboardBackspaceIcon>
+      </IconButton>
       <div className="mx-auto my-auto min-w-xl min-h-full flex flex-col gap-4">
         <h2 className="text-4xl">Admin Login</h2>
 
